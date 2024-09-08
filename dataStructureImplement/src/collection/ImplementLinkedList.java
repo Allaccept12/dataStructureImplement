@@ -1,6 +1,5 @@
 package collection;
 
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class ImplementLinkedList<E> {
@@ -14,6 +13,15 @@ public class ImplementLinkedList<E> {
     }
 
     public void addFirts(E value) {
+        final Node<E> prevHead = this.head;
+        final Node<E> newNod = new Node<>(value, head, null);
+        this.head = newNod;
+        if (prevHead == null) {
+            this.last = newNod;
+        } else {
+            prevHead.prev = newNod;
+        }
+        size++;
 
     }
 
@@ -55,8 +63,8 @@ public class ImplementLinkedList<E> {
         Node<E> next;
         Node<E> prev;
 
-        public Node(E value, Node<E> next, Node<E> prev) {
-            this.value = value;
+        public Node(E item, Node<E> next, Node<E> prev) {
+            this.item = item;
             this.next = next;
             this.prev = prev;
         }
