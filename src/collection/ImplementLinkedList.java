@@ -9,7 +9,14 @@ public class ImplementLinkedList<E> {
     private int size = 0;
 
     public void addLast(E value) {
-
+        final Node<E> l = last;
+        final Node<E> newNode = new Node<>(value, null, l);
+        last = newNode;
+        if (l == null)
+            head = newNode;
+        else
+            l.next = newNode;
+        size++;
     }
 
     public void addFirts(E value) {
@@ -26,11 +33,32 @@ public class ImplementLinkedList<E> {
     }
 
     public void removeFirst() {
+        if (head == null)
+            throw new NoSuchElementException();
 
+        Node<E> next = head.next;
+        head.item = null;
+        head.next = null;
+        head = next;
+        if (next == null)
+            last = null;
+        else
+            next.prev = null;
+        size--;
     }
 
     public void removeList() {
-
+        if (last == null)
+            throw new NoSuchElementException();
+        Node<E> prev = last.prev;
+        last.item = null;
+        last.prev = null;
+        last = prev;
+        if (prev == null)
+            head = null;
+        else
+            prev.next = null;
+        size--;
     }
 
     public E getFirst() {
